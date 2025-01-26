@@ -11,6 +11,7 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
@@ -29,15 +30,118 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    import React from "react";
+    import { motion } from "framer-motion";
+    
+    function IndexPage() {
+      return (
+        <div className="min-h-screen bg-gradient-to-r from-purple-500 to-pink-500 flex flex-col items-center justify-center">
+          <header className="w-full bg-white shadow-md py-4 flex items-center justify-center">
+            <motion.img
+              src="logo_final.png"
+              alt="CLIPHOP Logo"
+              className="w-16 h-16 mr-4"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.5 }}
+            />
+            <motion.h1
+              className="text-4xl font-extrabold text-purple-700"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              CLIPHOP
+            </motion.h1>
+          </header>
+    
+          <main className="flex flex-col items-center justify-center flex-grow text-center p-6">
+            <motion.h2
+              className="text-3xl font-bold text-white mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              Video Chaptering Made Easy
+            </motion.h2>
+            <motion.p
+              className="text-white max-w-md mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              Organize, structure, and enhance your video content efficiently. Start chaptering your videos today with CLIPHOP!
+            </motion.p>
+    
+            <div className="flex space-x-4">
+              <motion.button
+                className="bg-yellow-400 text-purple-900 px-6 py-2 rounded-lg shadow-lg hover:bg-yellow-300 transform hover:scale-105 transition"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get Started
+              </motion.button>
+              <motion.button
+                className="bg-white text-purple-700 px-6 py-2 rounded-lg shadow-lg hover:bg-gray-100 transform hover:scale-105 transition"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Learn More
+              </motion.button>
+            </div>
+          </main>
+    
+          <footer className="w-full bg-purple-700 text-white py-4">
+            <motion.p
+              className="text-center text-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
+              &copy; 2025 CLIPHOP. All rights reserved.
+            </motion.p>
+          </footer>
+        </div>
+      );
+    }
+    
+    export default IndexPage;
+    
+    import React from "react";
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    function IndexPage() {
+      return (
+        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center">
+          <header className="w-full bg-blue-600 text-white py-4 shadow-md">
+            <h1 className="text-center text-3xl font-bold">Welcome to CLIPHOP</h1>
+          </header>
+    
+          <main className="flex flex-col items-center justify-center flex-grow text-center p-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Video Chaptering Made Easy</h2>
+            <p className="text-gray-600 max-w-md mb-6">
+              Organize, structure, and enhance your video content efficiently. Start chaptering your videos today with CLIPHOP!
+            </p>
+    
+            <div className="flex space-x-4">
+              <button className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-500">
+                Get Started
+              </button>
+              <button className="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg shadow hover:bg-gray-400">
+                Learn More
+              </button>
+            </div>
+          </main>
+    
+          <footer className="w-full bg-gray-800 text-white py-4">
+            <p className="text-center text-sm">&copy; 2025 CLIPHOP. All rights reserved.</p>
+          </footer>
+        </div>
+      );
+    }
+    
+    export default IndexPage;
+    
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+
   </body>
 </html>
