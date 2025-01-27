@@ -81,4 +81,5 @@ This test will:
 - **Frontend Testing**: The frontend tests ensure that the user interface works as expected, from loading the website to interacting with the upload button. It also verifies if the frontend properly communicates with the backend API.
 
 ## Completed 
-- No
+- yes
+  
