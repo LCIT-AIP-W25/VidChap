@@ -42,8 +42,3 @@ node backend/da.js
 Finally, open the `frontend/index.js` file in your preferred code editor to start working on the frontend.
 
 ---
-
-Enjoy building with VidChap! If you encounter any issues, feel free to check the [GitHub repository](https://github.com/LCIT-AIP-W25/VidChap) for further documentation or open an issue.
-```
-
-This version breaks down the steps more clearly and includes a short introduction with prerequisites and additional support links.
