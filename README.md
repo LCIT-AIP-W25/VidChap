@@ -1,9 +1,6 @@
-Here's a more structured and informative markdown for setting up VidChap:
-
-```markdown
 # VidChap Setup Guide
 
-## Prerequisites
+Prerequisites
 Before you begin, make sure you have the following installed:
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/)
