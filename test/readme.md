@@ -28,6 +28,7 @@ cd test/
 Use `Mocha` to run the backend tests.
 
 ```bash
+npm/npx install 
 npx mocha backend.test-1.js
 ```
 
@@ -63,6 +64,7 @@ cd test/
 Now, you can run the frontend tests using Python and Selenium.
 
 ```bash
+python -m pip install -r requirements.txt
 python frontend-test-1.py
 ```
 
@@ -79,4 +81,5 @@ This test will:
 - **Frontend Testing**: The frontend tests ensure that the user interface works as expected, from loading the website to interacting with the upload button. It also verifies if the frontend properly communicates with the backend API.
 
 ## Completed 
-- No
+- yes
+  
