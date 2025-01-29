@@ -45,7 +45,7 @@ chunk_duration = 10000  # 10 seconds in milliseconds
 
 # Initialize the AudioSegment object from the in-memory WAV
 audio = AudioSegment.from_wav(io.BytesIO(audio_data))
-
+data = []
 # Process each 10-second chunk
 for i in range(0, len(audio), chunk_duration):
     chunk = audio[i:i + chunk_duration]
@@ -56,11 +56,16 @@ for i in range(0, len(audio), chunk_duration):
         result = recognizer.Result()
         result_dict = json.loads(result)
         timestamp = i / 1000  # Convert milliseconds to seconds
-        print(f"Timestamp: {timestamp:.2f}s - Text: {result_dict.get('text', '')}")
-        
+        #print(f"Timestamp: {timestamp:.2f}s - Text: {result_dict.get('text', '')}")
+        info = f"Timestamp: {timestamp:.2f}s - Text: {result_dict.get('text', '')}"
+        print(info)
+        data.append(info)
 
-# Final result in case there's any remaining data
-final_result = recognizer.FinalResult()
-final_result_dict = json.loads(final_result)
+
+
+
+# # Final result in case there's any remaining data
+# final_result = recognizer.FinalResult()
+# final_result_dict = json.loads(final_result)
 print("Final Transcript:")
-print(final_result_dict.get('text', ''))
+print(data)
