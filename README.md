@@ -12,6 +12,8 @@ First, clone the VidChap repository to your local machine:
 git clone https://github.com/LCIT-AIP-W25/VidChap.git
 ```
 
+# Node Setup (Java Script)
+
 ### 1. Navigate to the Project Directory
 Change to the VidChap directory:
 
@@ -37,3 +39,11 @@ node backend/da.js
 Finally, open the `frontend/index.js` file in your preferred code editor to start working on the frontend.
 
 ---
+
+# streamlit setup (python)
+```bash
+cd vidchap
+python -m pip install -r requirements.txt
+streamlit run app.py
+```
+
