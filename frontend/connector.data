@@ -1,0 +1,12 @@
+from your_module import (
+    convert_mp3_to_wav,
+    load_vosk_model,
+    transcribe_audio,
+    format_transcriptions
+)
+
+def process_audio(mp3_path: str, model_path: str):
+    wav_data, sr = convert_mp3_to_wav(mp3_path)
+    model = load_vosk_model(model_path)
+    transcripts = transcribe_audio(wav_data, sr, model)
+    return format_transcriptions(transcripts)
