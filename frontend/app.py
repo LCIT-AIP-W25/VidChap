@@ -21,6 +21,106 @@ st.markdown(
 )
 
 
+# Custom CSS Styling
+st.markdown(
+    """
+    <style>
+    /* Main container styling */
+
+    .main {
+        background-color: white ;
+        
+    }
+    
+
+    [data-testid="stSidebar"] button {
+        color: black !important;
+    }
+
+    /* Hover effects */
+    [data-testid="stSidebar"] button:hover {
+        color: #ffffff !important;
+        background-color: #ff6b6b !important;
+    }
+
+
+    
+    /* Main content area */
+    .main-content {
+        margin-right: 320px !important;
+        padding: 20px;
+    }
+    
+    /* Card styling */
+    .card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    
+    /* Video container */
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 15px;
+        margin: 20px 0;
+    }
+    
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* Download button styling */
+    .download-btn {
+        background: linear-gradient(45deg, #ff4b4b, #ff6b6b) !important;
+        color: white !important;
+        border: none !important;
+        padding: 12px 24px !important;
+        border-radius: 25px !important;
+        font-weight: 600 !important;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+/* Right Sidebar Styling */
+.right-sidebar {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+}
+
+.right-sidebar h3 {
+    color: #2b3a42;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.right-sidebar h4 {
+    color: #3c5c6e;
+    font-size: 1rem;
+    margin: 15px 0 10px;
+}
+
+.right-sidebar p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 8px 0;
+}
+
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 # Replace the existing sidebar code with this:
 with st.sidebar:
 

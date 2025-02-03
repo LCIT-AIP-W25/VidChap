@@ -1,6 +1,5 @@
 {
-  "type":"commonjs",
-
+  "type": "commonjs",
   "dependencies": {
     "@distube/ytdl-core": "^4.15.9",
     "@huggingface/inference": "^3.1.3",

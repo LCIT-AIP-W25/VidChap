@@ -18,7 +18,7 @@ def convert_mp3_to_wav_with_ffmpeg(mp3_file):
     ]
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if result.returncode != 0:
-        raise Exception(f"Error during MP3 to WAV conversion: {result.stderr.decode()}")
+        raise Exception(f"Error during sMP3 to WAV conversion: {result.stderr.decode()}")
     
     # Return the WAV audio data and sample rate (16000)
     return result.stdout, 16000
