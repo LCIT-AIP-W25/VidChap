@@ -1,85 +1,97 @@
+# README for Testing Framework
 
-# Test Cycle 1
-## Test Cases
-
-### Backend
-- **Link Processing**: Verify that the given link by the user is being processed correctly.
-- **Invalid Links**: Ensure that invalid links are handled properly.
-- **Audio Downloading**: Check if the audio file from the YouTube video is downloaded correctly.
-
-### Frontend
-- **Website Loading & Styling**: Test that the website loads properly and follows the structure defined in "Design-Action-1".
-- **Upload Button Functionality**: Ensure the upload button handles data properly, including invalid data.
-- **Frontend-Backend Communication**: Verify that the frontend successfully communicates with the backend.
+## Overview
+This project involves testing the functionality of a Python-based backend and a Streamlit-based frontend application. The application processes YouTube video URLs, downloads audio files, converts them to WAV format, and provides an intuitive user interface for interaction. This README covers the testing details for **Test Cycle 1** and outlines the plan for **Test Cycle 2**.
 
 ---
 
-## Backend Testing
+## Test Cycle 1: Summary
 
-### Step 1: Navigate to the `test/` folder
-Make sure you are in the correct directory before running the backend tests.
+### Backend Testing
+- **Link Processing**: Validated the extraction of video IDs from various YouTube URL formats.
+- **Audio Downloading**: Ensured audio files were successfully downloaded from YouTube.
+- **File Conversion**: Verified MP3-to-WAV conversion, including handling corrupted or invalid files.
 
-```bash
-cd test/
-```
-
-### Step 2: Run the Backend Tests
-
-Use `Mocha` to run the backend tests.
-
-```bash
-npm/npx install 
-npx mocha backend.test-1.js
-```
-
-This will run the following tests:
-- Validating that the link entered by the user is being processed correctly.
-- Handling invalid links.
-- Ensuring that the audio file is downloaded properly from YouTube.
+### Frontend Testing
+- **UI Rendering**: Confirmed sidebar components (logo, navigation buttons, and user profile section) rendered correctly.
+- **URL Input Functionality**: Tested that input fields processed user-provided URLs accurately and updated the session state.
+- **Frontend-Backend Communication**: Verified smooth interaction between frontend actions and backend processes.
 
 ---
 
-## Frontend Testing
+## How to Run Tests
 
-### Step 1: Start the Backend Server
+### Backend Testing
 
-Before testing the frontend, make sure the backend server is running. Navigate to the `backend/` folder and run the following command to start the server.
+#### Step 1: Navigate to the Test Directory
+```bash
+cd tests/
+```
 
+#### Step 2: Install Dependencies
+Make sure all required libraries are installed:
+```bash
+pip install -r requirements.txt
+```
+
+#### Step 3: Execute Backend Tests
+Run the tests using `pytest`:
+```bash
+pytest
+```
+
+#### Backend Features Tested:
+1. **`extract_video_id(url)`**: Ensures proper video ID extraction from various YouTube URL formats.
+2. **Audio Download**: Simulates downloading audio and verifies that the file is valid.
+3. **`convert_mp3_to_wav(mp3_path, wav_path)`**: Tests conversion functionality and handles corrupted audio files.
+
+### Frontend Testing
+
+#### Step 1: Start Backend Server
+Navigate to the `backend/` folder and start the server:
 ```bash
 cd backend/
-node da.js
+python app.py
 ```
 
-This will start the server that handles the frontend requests.
-
-### Step 2: Navigate to the `test/` folder
-Ensure you are in the `test/` folder before running the frontend test.
-
+#### Step 2: Execute Frontend Tests
+Navigate to the test directory and run frontend tests using Streamlit's testing module:
 ```bash
-cd test/
+python -m pytest frontend_tests.py
 ```
 
-### Step 3: Run the Frontend Tests
+#### Frontend Features Tested:
+1. Sidebar components: Logo, navigation buttons, and user profile section.
+2. URL input processing and session state updates.
+3. Download button interaction and success message display.
 
-Now, you can run the frontend tests using Python and Selenium.
+---
 
-```bash
-python -m pip install -r requirements.txt
-python frontend-test-1.py
-```
+## Test Cycle 2: Planned Enhancements
 
-This test will:
-- Check if the website is loading properly with the correct styling and structure.
-- Verify if the upload button is functioning properly and handling both valid and invalid data.
-- Ensure that the frontend is transmitting data to the backend correctly.
+### Backend
+1. **Improved Error Handling**: Test edge cases for invalid YouTube links and network errors during audio download.
+2. **File Validation**: Validate file types and integrity after downloading.
+3. **Scalability**: Stress-test the backend with multiple simultaneous requests.
+
+### Frontend
+1. **Dynamic Feedback**: Ensure real-time feedback for invalid URLs.
+2. **Enhanced UI Testing**: Validate responsiveness and accessibility for various devices.
+3. **Advanced Interaction**: Test complex workflows, such as multiple file uploads.
 
 ---
 
 ## Additional Notes
+- **Temporary Files**: Temporary audio files (e.g., `.mp3` or `.wav`) are automatically cleaned up at the end of each test session.
+- **Dependencies**: Ensure Python libraries listed in `requirements.txt` are installed before running tests.
 
-- **Backend Testing**: The backend tests check the API endpoints and their responses when a user submits a valid or invalid YouTube link. The tests also verify if the audio is downloaded correctly.
-- **Frontend Testing**: The frontend tests ensure that the user interface works as expected, from loading the website to interacting with the upload button. It also verifies if the frontend properly communicates with the backend API.
+---
 
-## Completed 
-- yes
-  
+## Completed in Test Cycle 1
+- Backend URL and audio functionality.
+- Frontend input processing and feedback flow. 
+
+## Upcoming in Test Cycle 2
+- Error handling for invalid input.
+- Stress testing for backend scalability.
+- Dynamic UI validation for improved user experience.
