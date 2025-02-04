@@ -145,7 +145,6 @@ def format_transcriptions(transcriptions: list[str]) -> str:
 
 
 
-# First modify your transcribe_audio function to accept a progress callback
 def transcribe_audio(
     audio_data: bytes,
     sample_rate: int,
