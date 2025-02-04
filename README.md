@@ -50,4 +50,4 @@ streamlit run app.py
 project_sc_1.mp4
 
 ![Watch the video]](https://github.com/LCIT-AIP-W25/VidChap/blob/testing/project_sc_1.mp4)
-![Alt Text](frontend/Screenshot 2025-02-04 184938.png)
+(frontend/Screenshot 2025-02-04 184938.png)
