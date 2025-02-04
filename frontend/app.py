@@ -1,6 +1,23 @@
 import streamlit as st
 import yt_dlp
 import re
+from backend_python import (
+    convert_mp3_to_wav,
+    load_vosk_model,
+    transcribe_audio,
+    format_transcriptions
+)
+import logging
+
+# Configure model path (preferably in secrets)
+VOSK_MODEL_PATH = "vosk-model-small-en-us-0.15"  # Update with your actual path
+
+
+# Add this logging configuration (in your main function or at top)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 
 def extract_video_id(url):
     patterns = [
@@ -126,7 +143,6 @@ with st.sidebar:
 
     st.image("logoblkrmbg.png", width=150)
     
-    st.markdown("### Navigation Menu")
     st.button("🏠 Dashboard")
     st.button("📊 Analytics")
     st.button("⚙️ Settings")
@@ -188,7 +204,7 @@ with st.sidebar:
 main_col, right_sidebar = st.columns([3, 1])
 
 with main_col:
-    # Create a basic text input field
+    # Create a  text input field
 
     st.markdown("<h1 style='color: #2b3a42;'>Enhance Your studies with AI</h1>", 
                 unsafe_allow_html=True)
@@ -213,9 +229,7 @@ with main_col:
                              label_visibility="collapsed")
     
     
-    
-    if st.button("⏬ Load Your Video & Audio", key="download_btn", 
-                use_container_width=True):
+    if st.button("⏬ Load Your Lectures", key="download_btn", use_container_width=True):
         if video_url:
             try:
                 with st.spinner("🔄 Processing... Please wait"):
@@ -228,9 +242,44 @@ with main_col:
                             "preferredquality": "192",
                         }],
                     }
+                
                     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                         info = ydl.extract_info(video_url, download=True)
+                        mp3_path = info['requested_downloads'][0]['filepath']
                         st.toast(f"🎉 Successfully downloaded: {info['title']}.mp3", icon="✅")
+                    
+                    # Transcription process
+                        with st.spinner("🔊 Running Extractor ... 💾"):
+                        # Initialize progress bar
+                            progress_bar = st.progress(0)
+                        
+                        # Convert and transcribe with progress updates
+                            wav_data, sr = convert_mp3_to_wav(mp3_path)
+                            model = load_vosk_model(VOSK_MODEL_PATH)
+                        
+                        # Create progress callback
+                            def update_progress(percent_complete):
+                                progress_bar.progress(percent_complete)
+                            
+                            transcripts = transcribe_audio(
+                                wav_data, 
+                                sr, 
+                                model,
+                                progress_callback=update_progress
+                            )
+                        
+                        # Final 100% update
+                            progress_bar.progress(100)
+                        
+                        # Format and store results
+                            formatted = format_transcriptions(transcripts)
+                            st.session_state.transcription = formatted
+                            st.session_state.audio_title = info['title']
+                            #print(st.session_state.transcription)
+                            with open("data.txt", "w") as file:
+                                file.write(st.session_state.transcription)
+                            st.toast("✅ Transcription completed!", icon="✅")
+                        
             except Exception as e:
                 st.error(f"❌ Error: {str(e)}")
         else:
