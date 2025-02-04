@@ -49,5 +49,5 @@ streamlit run app.py
 
 project_sc_1.mp4
 
-![Watch the video]](https://raw.githubusercontent.com/Yohankhan/LCIT-AIP-W25/VidChap/blob/testing/project_sc_1.mp4)
+![Watch the video]](https://raw.githubusercontent.com/Yohankhan/LCIT-AIP-W25/VidChap/testing/project_sc_1.mp4)
 
