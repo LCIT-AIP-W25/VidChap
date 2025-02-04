@@ -47,3 +47,4 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
+project_sc_1.mp4
