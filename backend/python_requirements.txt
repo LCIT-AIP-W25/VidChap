@@ -1,5 +1,0 @@
-subprocess
-json
-vosk
-pydub ( ffmpeg needed to run this module )
-io
