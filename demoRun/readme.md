@@ -13,7 +13,8 @@
     - Then go to command prompt and type 
       ```bash
       python -m pip install -r requirements.txt 
-      winget install ffmpeg ```
+      winget install ffmpeg
+       ```
       [ if the winget command doesnt work then install winget first and then run the above command or go to the official website to see more download options (https://www.gyan.dev/ffmpeg/builds) and make sure to add the ffmpeg path to your environment variables ]
       
 
