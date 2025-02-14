@@ -1,0 +1,7 @@
+streamlit
+yt_dlp
+groq
+pydub
+vosk
+subprocess
+pytube
