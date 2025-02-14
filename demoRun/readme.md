@@ -8,6 +8,7 @@
       ```bash
       git clone https://github.com/LCIT-AIP-W25/VidChap
       cd vidchap
+      cd demoRun
       ```
     - Download the vosk model - [vosk-model-small-en-us-0.15] from their official website (https://alphacephei.com/vosk/models) and paste it into the demoRun directory replacing the empty folder.
     - Then go to command prompt and type 
