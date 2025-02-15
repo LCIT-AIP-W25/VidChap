@@ -1,5 +1,6 @@
 import streamlit as st
 import yt_dlp
+import pandas as pd
 import re
 from backend_python import (
     convert_mp3_to_wav,
@@ -24,8 +25,9 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 
+
 def extract_chapter_data(text):
-    pattern = r"\[(.*?) (\d+):(\d+) (\d+):(\d+)\]"
+    pattern = r"\[chapter : (.*?) (\d+\.\d+)s (\d+\.\d+)s\]"
     
     chapter_names = []
     start_times = []
@@ -34,17 +36,12 @@ def extract_chapter_data(text):
     matches = re.findall(pattern, text)
     
     for match in matches:
-        chapter_name = match[0]
-        start_time = int(match[1]) * 60 + int(match[2])  # Convert mm:ss to seconds
-        end_time = int(match[3]) * 60 + int(match[4])    # Convert mm:ss to seconds
-        
-        chapter_names.append(chapter_name)
-        start_times.append(start_time)
-        end_times.append(end_time)
-
-    print("Regex running successfully")
+        chapter_names.append(match[0])
+        start_times.append(float(match[1]))
+        end_times.append(float(match[2]))
+        print("match",match)
+    
     return chapter_names, start_times, end_times
-
 
 def extract_video_id(url):
     patterns = [
@@ -306,6 +303,8 @@ with main_col:
                             with open("data.txt", "w") as file:
                                 file.write(st.session_state.transcription)
                             st.toast("✅ Transcription completed!", icon="✅")
+
+
                             completion = client.chat.completions.create(
                                 model="llama-3.3-70b-versatile",
                                 messages=[{
@@ -323,20 +322,63 @@ with main_col:
                             for chunk in completion:
                                 result += chunk.choices[0].delta.content or ""
 
-                            st.session_state.response = str(result)
-                            print(st.session_state.response)
-                            st.session_state.chapters, st.session_state.starts, st.session_state.ends = extract_chapter_data(st.session_state.response)
 
-                            print(st.session_state.chapters, st.session_state.starts, st.session_state.ends)
+                            result = str(result)
+                            #st.session_state.response = str(result)
+                            #print(st.session_state.response)
+                           
+                           # st.session_state.chapters, st.session_state.starts, st.session_state.ends = extract_chapter_data(st.session_state.response)
+
+                            #print(st.session_state.chapters, st.session_state.starts, st.session_state.ends)
+
+
                             # for a,b,c in zip(st.session_state.chapters,st.session_state.starts,st.session_state.ends):
                             #     print(a,b,c)
+        # Streamlit UI
+                            # st.title("📺 YouTube Chapter Navigator")
+                            # chapters, start_times,end = extract_chapter_data(result)
+        
+                            # st.markdown("### 📚 Video Chapters:")
+                            # st.success(result)
+                            # for chapter, start_time in zip(chapters, start_times):
+                            #     st.markdown(f'<a href="javascript:void(0);" onclick="seekTo({int(start_time)})">⏩ {chapter} ({int(start_time)}s)</a>', unsafe_allow_html=True)
+                            pattern = r"\[chapter : (.*?), (\d+\.\d+)s, (\d+\.\d+)s\]"
+                            matches = re.findall(pattern, result)
 
+# Convert times to mm:ss format
+                            def format_time(seconds):
+                                minutes = int(float(seconds) // 60)
+                                sec = int(float(seconds) % 60)
+                                return f"{minutes}:{sec:02d}"
 
+# Format data
+                            structured_data = [[m[0], format_time(m[1]), format_time(m[2])] for m in matches]
+
+# Create a DataFrame
+                            df = pd.DataFrame(structured_data, columns=["Chapter", "Start Time", "End Time"])
+
+                            st.title("📖 Chapter Breakdown")
+
+# 2️⃣ Display as a Table
+                            st.subheader("📝 Organized Chapter List")
+                            st.title(result)
                         
             except Exception as e:
                 st.error(f"❌ Error: {str(e)}")
         else:
             st.warning("⚠️ Please provide a valid YouTube URL first")
+
+
+
+
+    # if video_url:
+    #     video_id = extract_video_id(video_url)
+    
+    #     if video_id:
+    #     # Display embedded YouTube video
+
+    #     # Extract chapters and timestamps
+
 
 # Footer
 st.markdown("""
