@@ -8,9 +8,28 @@ from backend_python import (
     format_transcriptions
 )
 import logging
+# from forgot_password import forgot_password  # Importing the forgot password function
+# from login import login  # Importing the login function
 
 # Configure model path (preferably in secrets)
 VOSK_MODEL_PATH = "vosk-model-small-en-us-0.15"  # Update with your actual path
+
+# # Logging Configuration
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+# )
+
+# # Check if the user is logged in
+# if "logged_in" not in st.session_state or not st.session_state["logged_in"]:
+#     login()  # Show the login page if not logged in
+#     st.stop()  # Stop further execution if not logged in
+
+# # Logout button
+# if st.button("Logout"):
+#     st.session_state["logged_in"] = False
+#     st.session_state.pop("username", None)
+#     st.experimental_rerun()  # Redirect to login after logout
 
 
 # Add this logging configuration (in your main function or at top)
