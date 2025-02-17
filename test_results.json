@@ -1,0 +1,84 @@
+[
+    {
+        "test": "extract_video_id",
+        "input": "https://www.youtube.com/watch?v=abc123",
+        "expected": "abc123",
+        "actual": "abc123",
+        "status": "pass"
+    },
+    {
+        "test": "extract_video_id",
+        "input": "https://youtu.be/xyz789",
+        "expected": "xyz789",
+        "actual": "xyz789",
+        "status": "pass"
+    },
+    {
+        "test": "extract_video_id",
+        "input": "https://www.youtube.com/embed/lmn456",
+        "expected": "lmn456",
+        "actual": "lmn456",
+        "status": "pass"
+    },
+    {
+        "test": "extract_video_id",
+        "input": "https://invalid.com/video",
+        "expected": null,
+        "actual": null,
+        "status": "pass"
+    },
+    {
+        "test": "test_invalid_url",
+        "input": "invalid_url",
+        "expected": "ValueError",
+        "actual": "ValueError raised",
+        "status": "pass"
+    },
+    {
+        "test": "process_video_transcript",
+        "input": "https://youtu.be/jmmW0F0biz0",
+        "expected": "Valid transcript string",
+        "actual": "start of data \n[chapter : Introduction to Neural Networks 0.00 20.00] \n[chapter : Composition of Neu...",
+        "execution_time": 91.85,
+        "status": "pass"
+    }
+
+    System Log Output
+
+    2025-02-16 22:42:57,742 - root - INFO - Starting Test Suite for Video Transcription
+    ..[youtube] Extracting URL: https://youtu.be/jmmW0F0biz0
+    [youtube] jmmW0F0biz0: Downloading webpage
+    [youtube] jmmW0F0biz0: Downloading tv client config
+    [youtube] jmmW0F0biz0: Downloading player e7567ecf
+    [youtube] jmmW0F0biz0: Downloading tv player API JSON
+    [youtube] jmmW0F0biz0: Downloading ios player API JSON
+    [youtube] jmmW0F0biz0: Downloading m3u8 information
+    [info] jmmW0F0biz0: Downloading 1 format(s): 251
+    [download] Destination: jmmW0F0biz0.webm
+    [download] 100% of    3.49MiB in 00:00:00 at 13.25MiB/s
+    [ExtractAudio] Destination: jmmW0F0biz0.mp3
+    Deleting original file jmmW0F0biz0.webm (pass -k to keep)
+    donwload?
+    2025-02-16 22:43:03,221 - backend_python - INFO - Converting MP3 file 'C:\Users\atifa\VidChap\demoRun\jmmW0F0biz0.mp3' to WAV format...
+    2025-02-16 22:43:03,508 - backend_python - INFO - Loading Vosk model from 'vosk-model-en-us-0.22-lgraph'...
+    LOG (VoskAPI:ReadDataFiles():model.cc:213) Decoding params beam=13 max-active=7000 lattice-beam=6
+    LOG (VoskAPI:ReadDataFiles():model.cc:216) Silence phones 1:2:3:4:5:11:12:13:14:15
+    LOG (VoskAPI:RemoveOrphanNodes():nnet-nnet.cc:948) Removed 0 orphan nodes.
+    LOG (VoskAPI:RemoveOrphanComponents():nnet-nnet.cc:847) Removing 0 orphan components.
+    LOG (VoskAPI:ReadDataFiles():model.cc:248) Loading i-vector extractor from vosk-model-en-us-0.22-lgraph/ivector/final.ie
+    LOG (VoskAPI:ComputeDerivedVars():ivector-extractor.cc:183) Computing derived variables for iVector extractor
+    LOG (VoskAPI:ComputeDerivedVars():ivector-extractor.cc:204) Done.
+    LOG (VoskAPI:ReadDataFiles():model.cc:282) Loading HCL and G from vosk-model-en-us-0.22-lgraph/graph/HCLr.fst vosk-model-en-us-0.22-lgraph/graph/Gr.fst
+    LOG (VoskAPI:ReadDataFiles():model.cc:308) Loading winfo vosk-model-en-us-0.22-lgraph/graph/phones/word_boundary.int
+    2025-02-16 22:43:04,512 - backend_python - INFO - Starting transcription with 10000ms chunks...
+    WARNING (VoskAPI:LinearCgd():optimization.cc:549) Doing linear CGD in dimension 100, after 15 iterations the squared residual has got worse, 0.106449 > 0.0937365.  Will do an exact optimization.
+    2025-02-16 22:44:28,251 - backend_python - INFO - Completed transcription of 271.01s audio
+    2025-02-16 22:44:28,921 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+    .2025-02-16 22:44:29,594 - root - INFO - Test results saved to test_results.json
+    2025-02-16 22:44:29,594 - root - INFO - All tests completed.
+    
+    ----------------------------------------------------------------------
+    Ran 3 tests in 91.847s
+    
+    OK
+]
