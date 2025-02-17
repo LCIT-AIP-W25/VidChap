@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vidchap-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vidchap
+  template:
+    metadata:
+      labels:
+        app: vidchap
+    spec:
+      containers:
+        - name: vidchap
+          image: your-docker-image:latest
+          ports:
+            - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vidchap-service
+spec:
+  selector:
+    app: vidchap
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
