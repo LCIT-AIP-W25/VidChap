@@ -1,0 +1,200 @@
+{
+  "ratings": [
+    {
+      "video_id": "nB-jOi_bO0w",
+      "rating": 2.5,
+      "comments": "Timestamps and chapter names matched partially, some discrepancies.",
+      "reviewer": "Team Member 1",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "bpY6Hq9hbUo",
+      "rating": 3,
+      "comments": "Overall good, but a few minor issues with chapter name consistency.",
+      "reviewer": "Team Member 2",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "FtRC3G9y4pQ",
+      "rating": 5,
+      "comments": "Excellent match between timestamps and chapter names.",
+      "reviewer": "Team Member 3",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "cCxSIsayvaY",
+      "rating": 4,
+      "comments": "Good match, but could improve on timestamp precision.",
+      "reviewer": "Team Member 4",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "j-40f3Gp0wQ",
+      "rating": 1,
+      "comments": "Significant discrepancies in timestamps and chapter names.",
+      "reviewer": "Team Member 5",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "BKQ7sD6kxVc",
+      "rating": 3.5,
+      "comments": "Well matched, but some chapter names could be more specific.",
+      "reviewer": "Team Member 6",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "bRAifwXu8cc",
+      "rating": 1.5,
+      "comments": "Major issues with both timestamps and chapter names.",
+      "reviewer": "Team Member 7",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "5G8wqoZ-I00",
+      "rating": 2,
+      "comments": "Timestamps didn't match in several sections.",
+      "reviewer": "Team Member 8",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "UURrlesJPTM",
+      "rating": 2,
+      "comments": "Mismatch in chapter names, unclear in some sections.",
+      "reviewer": "Team Member 9",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "L2cWQnTrS4Q",
+      "rating": 2.5,
+      "comments": "Could use better consistency in chapter names and timing.",
+      "reviewer": "Team Member 10",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "Gw2v9g1Lx3E",
+      "rating": 3.5,
+      "comments": "Solid match, some minor issues with specific timestamps.",
+      "reviewer": "Team Member 11",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "KdZxcrSQkAA",
+      "rating": 3,
+      "comments": "Good overall, a few minor discrepancies with chapter details.",
+      "reviewer": "Team Member 12",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "yx2vRfOuUdA",
+      "rating": 0,
+      "comments": "Two different audios played after introduction, complete mismatch.",
+      "reviewer": "Team Member 13",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "HKAPEKSJYuk",
+      "rating": 4,
+      "comments": "Strong match, few areas that could use slight improvements.",
+      "reviewer": "Team Member 14",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "SCd5SDLamK0",
+      "rating": 3,
+      "comments": "Good, but timestamps didn't align perfectly with content.",
+      "reviewer": "Team Member 15",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "CYNsSoDC28Y",
+      "rating": 2.5,
+      "comments": "Slight mismatch with timestamps, but chapters are clear.",
+      "reviewer": "Team Member 16",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "vsBJNVKcHLs",
+      "rating": 2.5,
+      "comments": "Minor issues with both chapters and timestamps.",
+      "reviewer": "Team Member 17",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "MrFFbidzbJ8",
+      "rating": 1,
+      "comments": "Chapter names and timestamps do not match at all.",
+      "reviewer": "Team Member 18",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "ih9wdyM8Htc",
+      "rating": 4,
+      "comments": "Good match with timestamps, just minor chapter naming issues.",
+      "reviewer": "Team Member 19",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "S091Rglmwnc",
+      "rating": 3,
+      "comments": "Decent match, but minor timestamp misalignments.",
+      "reviewer": "Team Member 20",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "QtBnmBNVXwY",
+      "rating": 2.5,
+      "comments": "Timestamps mostly correct, chapter names need improvement.",
+      "reviewer": "Team Member 21",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "hXXpbbDc2sY",
+      "rating": 1.5,
+      "comments": "Poor match with chapter names and timestamps.",
+      "reviewer": "Team Member 22",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "HVR9EyeTw0E",
+      "rating": 3,
+      "comments": "Timestamps were mostly accurate, chapter names were off.",
+      "reviewer": "Team Member 23",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "FjCfcTFP50E",
+      "rating": 4,
+      "comments": "Very good match with timestamps and chapter names.",
+      "reviewer": "Team Member 24",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "7Bc_GCGoQlQ",
+      "rating": 0.5,
+      "comments": "Serious issues with mismatched chapters and timestamps.",
+      "reviewer": "Team Member 25",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "ZKWH_Xq6puo",
+      "rating": 1.5,
+      "comments": "Several mismatches with chapter names and timestamps.",
+      "reviewer": "Team Member 26",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "3M_Nr_kKovI",
+      "rating": 1,
+      "comments": "Timestamp and chapter name discrepancies are major.",
+      "reviewer": "Team Member 27",
+      "date": "2025-02-16"
+    },
+    {
+      "video_id": "0rlcPG0KwFg",
+      "rating": 1.5,
+      "comments": "Chapter names and timestamps do not align properly.",
+      "reviewer": "Team Member 28",
+      "date": "2025-02-16"
+    }
+  ]
+}
