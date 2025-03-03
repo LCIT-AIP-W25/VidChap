@@ -1,0 +1,8 @@
+{
+    "video": "example_video.mp4",
+    "chapters": [
+        {"start": 0.0, "end": 15.4},
+        {"start": 15.4, "end": 42.8},
+        {"start": 42.8, "end": 67.2}
+    ]
+}
