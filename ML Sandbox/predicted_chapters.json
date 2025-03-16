@@ -1,0 +1,8 @@
+{
+    "video": "Sample Video",
+    "chapters": [
+        {"start": 0.0, "end": 32.0, "title": "Intro"},
+        {"start": 32.0, "end": 75.0, "title": "Cooking Scene"},
+        {"start": 75.0, "end": 150.0, "title": "Traveling Outdoors"}
+    ]
+}
