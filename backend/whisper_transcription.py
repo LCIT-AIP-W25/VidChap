@@ -3,12 +3,7 @@ from typing import List, Dict, Tuple
 from pydub import AudioSegment
 import numpy as np
 import multiprocessing as mp
-from groq import Groq
 import os
-
-# API Key Configuration
-GROQ_API_KEY = os.getenv('GROQ_API_KEY', 'your_default_api_key_here')
-client = Groq(api_key=GROQ_API_KEY)
 
 def transcribe_audio(
     audio_path: str,
@@ -79,76 +74,44 @@ def format_timestamp(seconds: float) -> str:
     minutes, seconds = divmod(remainder, 60)
     return f"{int(hours):02}:{int(minutes):02}:{seconds:06.3f}".replace('.', ',')
 
-def generate_chapter_segments(transcript: str, segments: List[Dict]) -> str:
-    """Generates chapter breaks based on the transcript using Groq's API."""
-    formatted_segments = "\n".join(f"[{seg['formatted_start']} -> {seg['formatted_end']}] {seg['text']}" for seg in segments)
-    prompt = f"""
-        Identify natural chapter breaks from the following transcript based on topic shifts.
-        Format:
-        [chapter: {{name}} | {{start_timestamp}} | {{end_timestamp}}]
-        
-        Transcript:
-        {formatted_segments}
-    """
-    response = client.chat.completions.create(
-        model="llama3-70b-8192",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
-        max_tokens=1024,
-        top_p=1,
-        stream=False,
-    )
-    
-    return response.choices[0].message.content
-
-def process_audio(audio_path: str) -> Tuple[str, str]:
-    """Processes the audio file, transcribes it, and generates chapter segmentation."""
-    transcript, segments = transcribe_audio(audio_path)
-    chapter_segments = generate_chapter_segments(transcript, segments)
-    return transcript, chapter_segments
+def process_audio(audio_path: str) -> str:
+    """Processes the audio file and transcribes it."""
+    transcript, _ = transcribe_audio(audio_path)
+    return transcript
 
 if __name__ == "__main__":
-    input_file = "i3.mp3"
-    full_transcript, chapter_result = process_audio(input_file)
+    input_file = "audio.mp3"
+    full_transcript = process_audio(input_file)
     
     print("\nFull Transcript:")
     print(full_transcript)
+
+# Batched Transcription
+from faster_whisper import WhisperModel, BatchedInferencePipeline
+
+def batched_transcription(audio_path: str, model_size: str = "turbo", batch_size: int = 16):
+    model = WhisperModel(model_size, device="cuda", compute_type="float16")
+    batched_model = BatchedInferencePipeline(model=model)
+    segments, _ = batched_model.transcribe(audio_path, batch_size=batch_size)
     
-    print("\nChapter Segmentation:")
-    print(chapter_result)
+    for segment in segments:
+        print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
 
+# Faster Distil-Whisper
 
+def distil_whisper_transcription(audio_path: str, model_size: str = "distil-large-v3"):
+    model = WhisperModel(model_size, device="cuda", compute_type="float16")
+    segments, _ = model.transcribe(audio_path, beam_size=5, language="en", condition_on_previous_text=False)
+    
+    for segment in segments:
+        print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
 
-#------------------------- New Features to be added ----------------# 
+# Word-Level Timestamps
 
-#Batched Transcription
-
-# from faster_whisper import WhisperModel, BatchedInferencePipeline
-
-# model = WhisperModel("turbo", device="cuda", compute_type="float16")
-# batched_model = BatchedInferencePipeline(model=model)
-# segments, info = batched_model.transcribe("audio.mp3", batch_size=16)
-
-# for segment in segments:
-#     print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
-
-
-#Faster Distil-Whisper
-
-# from faster_whisper import WhisperModel
-
-# model_size = "distil-large-v3"
-
-# model = WhisperModel(model_size, device="cuda", compute_type="float16")
-# segments, info = model.transcribe("audio.mp3", beam_size=5, language="en", condition_on_previous_text=False)
-
-# for segment in segments:
-#     print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
-
-#Word-level timestamps
-
-# segments, _ = model.transcribe("audio.mp3", word_timestamps=True)
-
-# for segment in segments:
-#     for word in segment.words:
-#         print("[%.2fs -> %.2fs] %s" % (word.start, word.end, word.word))
+def word_level_timestamps(audio_path: str, model_size: str = "medium"):
+    model = WhisperModel(model_size, device="cuda", compute_type="float16")
+    segments, _ = model.transcribe(audio_path, word_timestamps=True)
+    
+    for segment in segments:
+        for word in segment.words:
+            print("[%.2fs -> %.2fs] %s" % (word.start, word.end, word.word))
