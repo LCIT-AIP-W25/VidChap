@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliphop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #6200ea;
+            color: white;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .menu-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #3700b3;
+            color: white;
+            padding: 1rem;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: left 0.3s ease;
+        }
+        .drawer.open {
+            left: 0;
+        }
+        .drawer ul {
+            list-style: none;
+            padding: 0;
+        }
+        .drawer ul li {
+            margin: 1rem 0;
+        }
+        .drawer ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .main-content {
+            padding: 2rem;
+            text-align: center;
+        }
+        .main-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .main-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .cta-button {
+            padding: 0.8rem 2rem;
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Cliphop</h1>
+        <span class="menu-icon" onclick="toggleDrawer()">☰</span>
+    </header>
+    <div class="drawer" id="drawer">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <h2>Welcome to Cliphop</h2>
+        <p>Your one-stop solution for video editing and sharing.</p>
+        <button class="cta-button">Get Started</button>
+        <div class="video-section"></div>
+            <h3>Featured Videos</h3>
+            <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/3JZ_D3ELwOQ" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+            </div>
+        </div>
+        <style>
+            .video-section {
+            margin-top: 2rem;
+            text-align: center;
+            }
+            .video-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            }
+            .video-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            }
+            .video-container iframe {
+            max-width: 100%;
+            border-radius: 10px;
+            }
+        </style>
+    </div>
+    <script>
+        function toggleDrawer() {
+            const drawer = document.getElementById('drawer');
+            drawer.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>
