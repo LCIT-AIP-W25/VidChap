@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipHop - Your YouTube Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .chapter { 
+            cursor: pointer; 
+            transition: background 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        .chapter:hover { 
+            background-color: rgba(0, 0, 0, 0.1);
+            border-left-color: #4F46E5;
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+        .chapter-active {
+            border-left-color: #4F46E5;
+            background-color: rgba(79, 70, 229, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-white">
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a class="font-['Pacifico'] text-2xl text-primary">Cliphop</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-primary">Home</a>
+                    <a href="#" class="text-gray-700 hover:text-primary">About Us</a>
+                    <a href="#" class="text-gray-700 hover:text-primary">Features</a>
+                    <a href="#" class="text-gray-700 hover:text-primary">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menuBtn" class="text-gray-700 hover:text-primary">
+                        <i class="ri-menu-line text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-primary">Home</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-primary">About Us</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-primary">Features</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Transform Your YouTube Experience</h1>
+                <p class="text-lg text-gray-600">Paste your YouTube link below and start watching!</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto">
+                <div class="relative mb-8">
+                    <input type="text" id="youtubeLink" placeholder="Paste your YouTube link here..." class="w-full px-4 py-3 border-2 border-gray-200 rounded-md focus:outline-none focus:border-primary">
+                    <button id="loadBtn" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary/80 transition-colors">
+                        <i class="ri-play-circle-line text-2xl"></i>
+                    </button>
+                </div>
+
+                <div id="videoContainer" class="video-container hidden bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+                    <iframe id="videoPlayer" frameborder="0" allowfullscreen></iframe>
+                </div>
+
+                <!-- Chapters Section -->
+                <div id="chaptersContainer" class="hidden mt-6">
+                    <h2 class="text-xl font-semibold mb-4">Video Chapters</h2>
+                    <div id="chaptersList" class="bg-gray-100 p-4 rounded-md shadow-md"></div>
+                </div>
+
+                <!-- Loading Indicator -->
+                <div id="loadingIndicator" class="hidden text-center mt-4 text-gray-600">
+                    <i class="ri-loader-4-line animate-spin text-2xl"></i> Loading...
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const youtubeLinkInput = document.getElementById('youtubeLink');
+        const loadBtn = document.getElementById('loadBtn');
+        const videoContainer = document.getElementById('videoContainer');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const chaptersContainer = document.getElementById('chaptersContainer');
+        const chaptersList = document.getElementById('chaptersList');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.addEventListener('click', (event) => {
+            if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        function getYouTubeVideoId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        // Function to parse the chapter string from your API response
+        function parseChapters(chaptersString) {
+            const chapters = [];
+            // Extract the chapter information using regex
+            const regex = /\[chapter : (.*?) \| (.*?) \| (.*?)\]/g;
+            let match;
+            
+            while ((match = regex.exec(chaptersString)) !== null) {
+                const title = match[1];
+                const startTime = match[2];
+                const endTime = match[3];
+                
+                // Convert timestamp (HH:MM:SS,MS) to seconds for YouTube
+                const startSeconds = convertTimeToSeconds(startTime);
+                
+                chapters.push({
+                    title: title,
+                    time: startSeconds,
+                    startTime: startTime,
+                    endTime: endTime
+                });
+            }
+            
+            return chapters;
+        }
+
+        // Convert timestamp format (HH:MM:SS,MS) to seconds
+        function convertTimeToSeconds(timeString) {
+            const [hours, minutes, secondsMs] = timeString.split(':');
+            const [seconds, ms] = secondsMs.split(',');
+            
+            return parseInt(hours) * 3600 + parseInt(minutes) * 60 + parseInt(seconds);
+        }
+
+        async function fetchChapters(videoId) {
+            try {
+                loadingIndicator.classList.remove('hidden');
+                const response = await fetch("http://localhost:8000/process-youtube", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ url: `https://www.youtube.com/watch?v=${videoId}` })
+                });
+                const data = await response.json();
+                loadingIndicator.classList.add('hidden');
+
+                if (!data || !data.chapters) {
+                    chaptersContainer.classList.add('hidden');
+                    return;
+                }
+
+                // Parse the chapters string into an array of objects
+                const chapters = parseChapters(data.chapters);
+                
+                if (chapters.length === 0) {
+                    chaptersContainer.classList.add('hidden');
+                    return;
+                }
+
+                chaptersList.innerHTML = "";
+                chapters.forEach(chapter => {
+                    const chapterElement = document.createElement('div');
+                    chapterElement.className = "chapter px-4 py-2 bg-white rounded-md shadow-sm mb-2";
+                    
+                    const titleSpan = document.createElement('span');
+                    titleSpan.className = "font-medium";
+                    titleSpan.textContent = chapter.title;
+                    
+                    const timeSpan = document.createElement('span');
+                    timeSpan.className = "text-gray-500 text-sm";
+                    timeSpan.textContent = chapter.startTime;
+                    
+                    chapterElement.appendChild(titleSpan);
+                    chapterElement.appendChild(timeSpan);
+                    
+                    chapterElement.addEventListener('click', () => {
+                        // Remove active class from all chapters
+                        document.querySelectorAll('.chapter').forEach(el => {
+                            el.classList.remove('chapter-active');
+                        });
+                        
+                        // Add active class to clicked chapter
+                        chapterElement.classList.add('chapter-active');
+                        
+                        // Update video player to start at the chapter time
+                        videoPlayer.src = `https://www.youtube.com/embed/${videoId}?start=${chapter.time}`;
+                    });
+                    chaptersList.appendChild(chapterElement);
+                });
+                
+                chaptersContainer.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error fetching chapters:", error);
+                loadingIndicator.classList.add('hidden');
+                chaptersContainer.classList.add('hidden');
+            }
+        }
+
+        loadBtn.addEventListener('click', async () => {
+            const url = youtubeLinkInput.value;
+            const videoId = getYouTubeVideoId(url);
+            if (!videoId) return alert("Invalid YouTube URL");
+
+            videoPlayer.src = `https://www.youtube.com/embed/${videoId}`;
+            videoContainer.classList.remove('hidden');
+            await fetchChapters(videoId);
+        });
+    </script>
+</body>
+</html>
