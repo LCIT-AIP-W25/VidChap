@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipHop - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4F46E5',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-white">
+    <nav class="fixed top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="font-['Pacifico'] text-2xl text-primary">Cliphop</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary">Home</a>
+                    <a href="#" class="text-gray-700 hover:text-primary">About Us</a>
+                    <a href="#" class="text-gray-700 hover:text-primary">Features</a>
+                    <a href="#" class="text-gray-700 hover:text-primary">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menuBtn" class="text-gray-700 hover:text-primary">
+                        <i class="ri-menu-line text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="block px-3 py-2 text-gray-700 hover:text-primary">Home</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-primary">About Us</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-primary">Features</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-primary">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16 min-h-screen">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="max-w-md mx-auto">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="px-6 py-8">
+                        <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Create Your Account</h2>
+                        <form id="signupForm">
+                            <div class="mb-6">
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="ri-user-line text-gray-400"></i>
+                                    </div>
+                                    <input type="text" id="name" name="name" class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="ri-mail-line text-gray-400"></i>
+                                    </div>
+                                    <input type="email" id="email" name="email" class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="ri-lock-line text-gray-400"></i>
+                                    </div>
+                                    <input type="password" id="password" name="password" class="pl-10 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" required>
+                                </div>
+                                <p class="mt-1 text-xs text-gray-500">Password must be at least 6 characters</p>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition duration-200">
+                                    Create Account
+                                </button>
+                            </div>
+                        </form>
+                        <div id="error-message" class="mt-4 text-sm text-red-600 text-center"></div>
+                        <div class="mt-6 text-center text-sm">
+                            <p class="text-gray-600">
+                                Already have an account? 
+                                <a href="login.html" class="font-medium text-primary hover:text-primary/80">
+                                    Sign in
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    
+    <!-- Firebase Configuration and Authentication -->
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.addEventListener('click', (event) => {
+            if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
